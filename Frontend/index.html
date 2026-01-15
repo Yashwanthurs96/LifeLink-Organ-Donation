@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink | Save a Life Through Donation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #e63946;
+            --secondary: #1d3557;
+            --light: #f1faee;
+            --dark: #1d1d1d;
+            --gray: #666;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fcfcfc;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            background: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--secondary);
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--dark);
+            margin: 0 15px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover { color: var(--primary); }
+
+        /* --- BUTTONS --- */
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white) !important;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: transform 0.2s;
+            display: inline-block;
+            border: none; /* Added for form button */
+            cursor: pointer; /* Added for form button */
+        }
+        
+        /* New class for the form submit button to match the primary style */
+        .btn-submit {
+            width: 100%;
+            background: var(--primary);
+            color: var(--white);
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background: #d42c38; /* Slightly darker shade of primary */
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 23px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 10px;
+            display: inline-block;
+        }
+
+        .btn-primary:hover { transform: scale(1.05); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 120px 0;
+            background: linear-gradient(rgba(29, 53, 87, 0.85), rgba(29, 53, 87, 0.85)), 
+                        url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; font-weight: 700; }
+        .hero h1 span { color: var(--primary); }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; max-width: 700px; margin-inline: auto; opacity: 0.9; }
+
+        /* --- STATS SECTION --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .stat-item h3 { font-size: 2.5rem; color: var(--primary); margin-bottom: 5px; }
+        .stat-item p { color: var(--gray); font-weight: 600; }
+
+        /* --- WORKFLOW / PROCESS --- */
+        .section-title { text-align: center; font-size: 2.2rem; margin: 60px 0 40px; color: var(--secondary); }
+        
+        .card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .card:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+        
+        .icon {
+            background: var(--primary);
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            color: var(--white);
+            margin: 0 auto 20px;
+            font-weight: 700;
+        }
+
+        /* --- MYTHS VS FACTS --- */
+        .myths-section { background: #f1faee50; padding: 80px 0; }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .myth { background: #ffdada; color: #b11b1b; }
+        .fact { background: #d4f7d4; color: #1b631b; }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            padding: 30px;
+            border-left: 5px solid var(--primary);
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .faq-item h4 { margin-bottom: 15px; color: var(--secondary); font-size: 1.1rem; }
+
+        /* --- IMPACT STORIES --- */
+        .story-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .story-card img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--light);
+        }
+
+        .story-card p { font-style: italic; color: var(--gray); margin-bottom: 15px; }
+        .story-card h5 { color: var(--secondary); font-size: 1rem; }
+
+        /* --- REGISTRATION FORM --- */
+        #register-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .form-group input[type="text"], 
+        .form-group input[type="email"], 
+        .form-group input[type="date"],
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+            accent-color: var(--primary);
+        }
+
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--secondary);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+
+        footer p { opacity: 0.7; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Life<span>Link</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#process">The Process</a></li>
+                <li><a href="#faq">Facts</a></li>
+                <li><a href="#register-section" class="btn-primary">Register Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Your Decision Today Could Be Someone's <span>Tomorrow.</span></h1>
+            <p>One organ donor can save up to eight lives. Join the national registry and leave a legacy of hope for those waiting for a second chance.</p>
+            <div class="hero-btns">
+                <a href="#register-section" class="btn-primary">Become a Donor</a>
+                <a href="#" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="stats">
+        <div class="container grid-3">
+            <div class="stat-item">
+                <h3>100k+</h3>
+                <p>Waiting for transplants</p>
+            </div>
+            <div class="stat-item">
+                <h3>8 Lives</h3>
+                <p>Saved by one donor</p>
+            </div>
+            <div class="stat-item">
+                <h3>Every 10 Min</h3>
+                <p>A new name is added</p>
+            </div>
+        </div>
+    </section>
+
+    [attachment_0](attachment)
+    <section id="process" class="process-section">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="icon">1</div>
+                    <h3>Register</h3>
+                    <p>Sign up online through our secure portal or at your local DMV in less than 2 minutes.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">2</div>
+                    <h3>Inform</h3>
+                    <p>Tell your family about your decision so they can support your wish to give back.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">3</div>
+                    <h3>Save Lives</h3>
+                    <p>Your selfless gift provides a future for recipients and their families for years to come.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="myths-section">
+        <div class="container">
+            <h2 class="section-title">Donation Facts</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <span class="badge myth">MYTH</span>
+                    <h4>"Doctors won't work as hard to save my life if they see I'm a donor."</h4>
+                    <p><span class="badge fact">FACT</span> Medical teams prioritize saving your life first. Donation is only discussed after every life-saving measure is exhausted.</p>
+                </div>
+                <div class="faq-item">
+                    <span class="badge myth">MYTH</span>
+                    <h4>"I am too old to be an organ donor."</h4>
+                    <p><span class="badge fact">FACT</span> There is no cut-off age for donation. Organs have been successfully transplanted from donors in their 90s.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stories">
+        <div class="container">
+            <h2 class="section-title">Impact Stories</h2>
+            <div class="grid-3">
+                <div class="story-card">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="Sarah">
+                    <p>"Because of a selfless donor, I got to walk my daughter down the aisle. I'm living proof that donation changes everything."</p>
+                    <h5>— Robert, Kidney Recipient</h5>
+                </div>
+                <div class="story-card">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80" alt="Mark">
+                    <p>"Losing our son was hard, but knowing he saved four lives keeps his spirit alive in our hearts every single day."</p>
+                    <h5>— The Miller Family, Donor Family</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="register-section">
+        <div class="container">
+            <h2 class="section-title">Join the Registry</h2>
+            <div class="form-container">
+                <form id="donorForm">
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="emailAddress" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dateOfBirth" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blood-type">Blood Type</label>
+                        <select id="blood-type" name="bloodType" required>
+                            <option value="">Select your blood type</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="NA">I don't know</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="consent-checkbox">Donation Consent</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="consent-checkbox" name="consent" required>
+                            <label for="consent-checkbox" style="font-weight: 400; color: var(--dark);">I voluntarily consent to the donation of my organs and tissues after my death for transplantation, therapy, research, or education.</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Complete Registration</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 LifeLink Organ Donation Registry. Your legacy, their future.</p>
+        </div>
+    </footer>
+<script>
+document.getElementById("donorForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const data = {
+        fullName: document.getElementById("full-name").value,
+        emailAddress: document.getElementById("email").value,
+        dateOfBirth: document.getElementById("dob").value,
+        bloodType: document.getElementById("blood-type").value,
+        consent: document.getElementById("consent-checkbox").checked
+    };
+
+    const response = await fetch("http://localhost:5000/api/donors/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    alert(result.message);
+
+    if (response.ok) {
+        document.getElementById("donorForm").reset();
+    }
+});
+</script>
+</body>
+</html>
