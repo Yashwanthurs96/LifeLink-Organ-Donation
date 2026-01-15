@@ -4,38 +4,30 @@ const Donor = require("../models/Donor");
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
-    try {
-        const {
-            fullName,
-            emailAddress,
-            dateOfBirth,
-            bloodType,
-            consent
-        } = req.body;
+  try {
+    console.log(req.body); // helps debug
 
-        if (!consent) {
-            return res.status(400).json({ message: "Consent required" });
-        }
+    const { fullName, emailAddress, dateOfBirth, bloodType, consent } = req.body;
 
-        const existing = await Donor.findOne({ email: emailAddress });
-        if (existing) {
-            return res.status(400).json({ message: "Email already registered" });
-        }
-
-        const donor = new Donor({
-            fullName,
-            email: emailAddress,
-            dob: dateOfBirth,
-            bloodType,
-            consent
-        });
-
-        await donor.save();
-        res.status(201).json({ message: "Registration successful" });
-
-    } catch (err) {
-        res.status(500).json({ message: "Server error" });
+    if (!fullName || !emailAddress || !dateOfBirth || !bloodType) {
+      return res.status(400).json({ message: "Missing fields" });
     }
+
+    const donor = new Donor({
+      fullName,
+      email: emailAddress,
+      dob: dateOfBirth,
+      bloodType,
+      consent
+    });
+
+    await donor.save();
+
+    res.json({ message: "Registration successful" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 module.exports = router;
