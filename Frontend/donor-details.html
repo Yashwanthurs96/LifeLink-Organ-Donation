@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LifeLink | Donor Details</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #e63946;
+      --secondary: #1d3557;
+      --light: #f1faee;
+      --dark: #1d1d1d;
+      --gray: #666;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fcfcfc;
+      color: var(--dark);
+    }
+
+    .navbar {
+      background: var(--white);
+      padding: 20px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+    
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--secondary);
+      letter-spacing: 0.5px;
+    }
+
+    .logo span { color: var(--primary); }
+
+    .section {
+      padding: 80px 0;
+      background: var(--light);
+    }
+
+    .card {
+      max-width: 600px;
+      margin: auto;
+      background: var(--white);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--gray);
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group > label {
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    /* ===== PERFECT CHECKBOX ALIGNMENT ===== */
+    .checkbox-list {
+      margin-top: 10px;
+    }
+
+    .organ-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .organ-option input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+      transform: scale(1.2);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .organ-option label {
+      font-weight: 400;
+      margin: 0;
+      cursor: pointer;
+      display: inline;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: var(--white);
+      padding: 14px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-submit:hover {
+      background: #d42c38;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a class="logo">Life<span>Link</span></a>
+  </div>
+</nav>
+
+<section class="section">
+  <div class="container">
+    <div class="card">
+
+      <h1 id="welcomeText"></h1>
+      <p class="subtitle">Your decision today can save lives tomorrow.</p>
+
+      <form id="donorDetailsForm">
+
+        <!-- ORGANS -->
+        <div class="form-group">
+          <label>Organs you wish to donate</label>
+          <div class="checkbox-list">
+
+            <div class="organ-option">
+              <input type="checkbox" id="kidney" value="Kidney">
+              <label for="kidney">Kidney</label>
+            </div>
+
+            <div class="organ-option">
+              <input type="checkbox" id="liver" value="Liver">
+              <label for="liver">Liver</label>
+            </div>
+
+            <div class="organ-option">
+              <input type="checkbox" id="heart" value="Heart">
+              <label for="heart">Heart</label>
+            </div>
+
+            <div class="organ-option">
+              <input type="checkbox" id="lungs" value="Lungs">
+              <label for="lungs">Lungs</label>
+            </div>
+
+            <div class="organ-option">
+              <input type="checkbox" id="pancreas" value="Pancreas">
+              <label for="pancreas">Pancreas</label>
+            </div>
+
+            <div class="organ-option">
+              <input type="checkbox" id="cornea" value="Cornea">
+              <label for="cornea">Cornea (Eyes)</label>
+            </div>
+
+            <div class="organ-option">
+              <input type="checkbox" id="tissues" value="Tissues">
+              <label for="tissues">Tissues</label>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- BLOOD GROUP -->
+        <div class="form-group">
+          <label>Confirm Blood Group</label>
+          <select id="bloodGroup" required>
+            <option value="">Select</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>AB+</option><option>AB-</option>
+            <option>O+</option><option>O-</option>
+          </select>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="form-group">
+          <label>Contact Number</label>
+          <input type="tel" id="contactNumber" required>
+        </div>
+
+        <!-- FINAL CONSENT -->
+        <div class="form-group">
+          <div class="organ-option">
+            <input type="checkbox" id="finalConsent" required>
+            <label for="finalConsent">
+              I voluntarily consent to donate the selected organs after my death
+              and confirm that I have informed my family.
+            </label>
+          </div>
+        </div>
+
+        <button class="btn-submit">Submit Details</button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const type = params.get("type");
+
+  document.getElementById("welcomeText").innerText =
+    type === "existing"
+      ? "Welcome back to LifeLink 🙌 What can I do for you this time?"
+      : "Welcome to LifeLink ❤️ Are you ready to save lives?";
+</script>
+
+<script>
+  document.getElementById("donorDetailsForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const organs = [];
+    document.querySelectorAll(".checkbox-list input:checked")
+      .forEach(cb => organs.push(cb.value));
+
+    const data = {
+      email: localStorage.getItem("userEmail"),
+      organs,
+      bloodGroup: document.getElementById("bloodGroup").value,
+      contactNumber: document.getElementById("contactNumber").value
+    };
+
+    const response = await fetch("http://localhost:5000/api/donors/details", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      window.location.href = "thankyou.html";
+    } else {
+      if (response.ok) {
+        window.location.href = "thankyou.html";
+      }
+    }
+
+  });
+</script>
+
+</body>
+</html>

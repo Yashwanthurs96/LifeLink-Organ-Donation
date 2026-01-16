@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LifeLink | Thank You</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #e63946;
+      --secondary: #1d3557;
+      --light: #f1faee;
+      --dark: #1d1d1d;
+      --gray: #666;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fcfcfc;
+      color: var(--dark);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: var(--white);
+      padding: 20px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+        font-size: 2.2rem;
+        font-weight: 800;
+        text-decoration: none;
+        color: var(--secondary);
+        letter-spacing: 0.5px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    /* MAIN SECTION */
+    .section {
+      padding: 100px 0;
+      background: var(--light);
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+    }
+
+    .card {
+      max-width: 600px;
+      margin: auto;
+      background: var(--white);
+      padding: 50px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: var(--secondary);
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    p {
+      color: var(--gray);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .highlight {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 12px 25px;
+      background: var(--primary);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background: #d42c38;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container">
+      <a class="logo">Life<span>Link</span></a>
+    </div>
+  </nav>
+
+  <!-- THANK YOU SECTION -->
+  <section class="section">
+    <div class="container">
+      <div class="card">
+        <h1>Thank You for Choosing Life ❤️</h1>
+
+        <p>
+          Your registration has been successfully completed.
+          <br><br>
+          <span class="highlight">
+            Our LifeLink team will contact you soon
+          </span>
+          for confirmation and to guide you through the next steps of the donation process.
+        </p>
+
+        <p>
+          Your decision today has the power to save multiple lives.
+          We truly appreciate your courage and compassion.
+        </p>
+
+        <a href="index.html" class="btn">Back to Home</a>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

@@ -52,10 +52,11 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            font-weight: 800;
             text-decoration: none;
             color: var(--secondary);
+            letter-spacing: 0.5px;
         }
 
         .logo span { color: var(--primary); }
@@ -190,7 +191,6 @@
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 40px;
         }
-
         .faq-item {
             background: var(--white);
             padding: 30px;
@@ -249,6 +249,7 @@
 
         .form-group input[type="text"], 
         .form-group input[type="email"], 
+        .form-group input[type="password"],
         .form-group input[type="date"],
         .form-group select {
             width: 100%;
@@ -257,6 +258,7 @@
             border-radius: 5px;
             font-size: 1rem;
         }
+
 
         .checkbox-group {
             display: flex;
@@ -324,8 +326,6 @@
             </div>
         </div>
     </section>
-
-    [attachment_0](attachment)
     <section id="process" class="process-section">
         <div class="container">
             <h2 class="section-title">How It Works</h2>
@@ -391,13 +391,34 @@
             <div class="form-container">
                 <form id="donorForm">
                     <div class="form-group">
-                        <label for="full-name">Full Name</label>
+                    <label for="full-name">Full Name</label>
                         <input type="text" id="full-name" name="fullName" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" name="emailAddress" required>
+                        <input 
+                          type="email"
+                          id="email"
+                          name="emailAddress"
+                          required
+                          pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$"
+                          title="Enter a valid email (gmail, yahoo, outlook only)"
+                        >
                     </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" id="password" required>
+
+  <!-- FORGOT PASSWORD LINK -->
+                      <div style="text-align: right; margin-top: 5px;">
+                        <a href="forgot-password.html"
+                           style="font-size: 0.9rem; color: #1d3557;">
+                           Forgot password?
+                        </a>
+                      </div>
+                    </div>
+
+
                     <div class="form-group">
                         <label for="dob">Date of Birth</label>
                         <input type="date" id="dob" name="dateOfBirth" required>
@@ -441,27 +462,38 @@ document.getElementById("donorForm").addEventListener("submit", async function (
     const data = {
         fullName: document.getElementById("full-name").value,
         emailAddress: document.getElementById("email").value,
+        password: document.getElementById("password").value,
         dateOfBirth: document.getElementById("dob").value,
         bloodType: document.getElementById("blood-type").value,
         consent: document.getElementById("consent-checkbox").checked
     };
 
-    const response = await fetch("http://localhost:5000/api/donors/register", {
+    try {
+        const response = await fetch("http://127.0.0.1:5000/api/donors/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
 
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
+        const result = await response.json();
 
-    const result = await response.json();
-    alert(result.message);
+        if (response.ok) {
+            localStorage.setItem("userEmail", data.emailAddress);
 
-    if (response.ok) {
-        document.getElementById("donorForm").reset();
+            if (result.message === "Login successful") {
+                window.location.href = "/donor-details.html?type=existing";
+            } else {
+                window.location.href = "/donor-details.html?type=new";
+            }
+        } else {
+            alert(result.message || "Registration failed");
+        }
+
+    } catch (error) {
+        alert("Backend not reachable");
     }
 });
 </script>
+
 </body>
 </html>
